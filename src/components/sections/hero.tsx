@@ -7,9 +7,12 @@ import { cn } from "@/lib/utils";
 export function Hero() {
   return (
     <section className="relative bg-white overflow-hidden min-h-[750px] lg:min-h-[850px] flex items-center">
-      {/* Sharp Diagonal Background Layer (Desktop) - Moved line to the right */}
-      <div 
-        className="absolute top-0 right-0 w-full lg:w-[65%] h-[40%] lg:h-full bg-primary [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%)] lg:[clip-path:polygon(55%_0,100%_0,100%_100%,10%_100%)] z-0" 
+      {/* Diagonal Background Layer */}
+      {/* Mobile: solid strip across top 40% */}
+      {/* Desktop: clip-path percentages are relative to the full section width,
+          same coordinate space as the circle, so they stay aligned at all viewport sizes */}
+      <div
+        className="absolute top-0 right-0 w-full h-[40%] lg:h-full bg-primary [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%)] lg:[clip-path:polygon(76%_0,100%_0,100%_100%,54%_100%)] z-0"
         aria-hidden="true"
       />
 
@@ -49,14 +52,14 @@ export function Hero() {
 
         {/* Right Column: Visuals */}
         <div className="lg:col-span-5 relative h-[550px] lg:h-[700px] flex items-end justify-center lg:justify-end mt-12 lg:mt-0">
-          {/* Orange Offset Circle - Moved slightly to the right */}
-          <div 
-            className="absolute top-[15%] lg:top-[20%] right-[0%] lg:right-[30%] w-[350px] h-[350px] bg-accent rounded-full z-10 shadow-2xl shadow-accent/20" 
+          {/* Orange Circle */}
+          <div
+            className="absolute top-[15%] lg:top-[20%] right-[0%] lg:right-[40%] w-[350px] h-[350px] bg-accent rounded-full z-10 shadow-2xl shadow-accent/20"
             aria-hidden="true"
           />
 
           {/* Cutout Image - Moved more to the right */}
-          <div className="relative z-20 h-[105%] lg:h-[115%] w-auto flex items-end overflow-visible lg:translate-x-12">
+          <div className="relative z-20 h-[105%] lg:h-[115%] w-auto flex items-end overflow-visible lg:-translate-x-12">
             <Image
               src="/cleaning-lady-hero.svg"
               alt="Schoonmaak specialist Jansma & Dik"

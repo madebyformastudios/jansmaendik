@@ -125,21 +125,14 @@ export function Header() {
                   <NavigationMenuLink
                     render={<Link href={link.href} />}
                     className={cn(
-                      navigationMenuTriggerStyle(),
+                      navigationMenuTriggerStyle(), 
                       "bg-transparent font-medium text-slate-600 hover:text-slate-900 relative"
                     )}
                   >
                     {link.name}
-                    {link.highlight && (
-                      <span className="absolute top-2 -right-1 flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-                      </span>
-                    )}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
+              ))}            </NavigationMenuList>
           </NavigationMenu>
         </div>
 
