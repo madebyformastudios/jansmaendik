@@ -38,8 +38,8 @@ export function Footer() {
           </div>
           <p className="leading-relaxed">
             Schoonmaakbedrijf Jansma & Dik B.V.<br />
-            Langezelestraat 4<br />
-            4382 NJ Vlissingen
+            Stroomweg 14<br />
+            4382 WX Vlissingen
           </p>
           <div className="space-y-1">
             <p>T: <Link href="tel:0118461892" className="hover:text-white transition-colors">0118 - 461892</Link></p>
