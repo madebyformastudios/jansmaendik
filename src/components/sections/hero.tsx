@@ -4,6 +4,32 @@ import { Phone, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+const clientLogos = [
+  "portfolio_logos_13_0a_Laspartners.jpg",
+  "portfolio_logos_19_0a_Verbrugge.jpeg",
+  "portfolio_logos_20_0a_Logo_Wielemaker_RGB.jpg",
+  "portfolio_logos_21_0a_Damen.png",
+  "portfolio_logos_2140fe4830c4935b7ba_0a_renault_dijkwel_logo.png",
+  "portfolio_logos_27_0a_VRZ.jpeg",
+  "portfolio_logos_299789548395fd25cfc_0a_Archipel.png",
+  "portfolio_logos_43413d6c3d106cc14fe_0a_Weststrate.png",
+  "portfolio_logos_4a33ff25e3eff4f8b94_0a_Shipyard_Reimerswaal.png",
+  "portfolio_logos_60fdbfa132e6c4ae286_0a_Dockwize.png",
+  "portfolio_logos_730ecea40edf08a032a_0a_McCain.png",
+  "portfolio_logos_7627be236de6d7e621a_0a_philadelphia.jpg",
+  "portfolio_logos_85daa3a0ccd4381d89f_0a_van-den-berg.png",
+  "portfolio_logos_91be213e2da7cce54ef_0a_Schipper.png",
+  "portfolio_logos_93ad45d7d044e38f239_0a_Luijten-VVZ-logo-home.png",
+  "portfolio_logos_a465068211dd0c2a09e_0a_logo_zib.png",
+  "portfolio_logos_ac6a8b3cc5aeb9a58c8_0a_Gapph.jpg",
+  "portfolio_logos_c99e31f1c321e79b3ee_0a_Bouwbedrijf_joziasse_logo.png",
+  "portfolio_logos_dc6f9c9d3c38caf3430_0a_Website_logo_zichtbaar_def.png",
+  "portfolio_logos_e18b654a405245b524c_0a_Onze_Wijs.png",
+  "portfolio_logos_ee4ddd1dc3a6d0515da_0a_Zeeuws_Museum.png",
+  "portfolio_logos_f5266a7f9c6c09b2ac2_0a_logo_sinke_wonen.png",
+  "portfolio_logos_f69a7be71569685b329_0a_emergis.png"
+];
+
 export function Hero() {
   return (
     <section className="relative bg-white overflow-hidden min-h-[750px] lg:min-h-[850px] flex items-center">
@@ -33,10 +59,11 @@ export function Hero() {
           
           <div className="mt-10 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
             <Button 
-              asChild
+              render={<Link href="/offerte" />}
+              nativeButton={false}
               className="bg-accent hover:bg-accent/90 text-white px-8 py-7 text-lg rounded-md shadow-lg shadow-accent/20 transition-all hover:translate-y-[-2px]"
             >
-              <Link href="/offerte">Vrijblijvende offerte aanvragen</Link>
+              Vrijblijvende offerte aanvragen
             </Button>
             <Link 
               href="tel:0118461892" 
@@ -54,7 +81,7 @@ export function Hero() {
         <div className="lg:col-span-5 relative h-[550px] lg:h-[700px] flex items-end justify-center lg:justify-end mt-12 lg:mt-0">
           {/* Orange Circle */}
           <div
-            className="absolute top-[15%] lg:top-[20%] right-[0%] lg:right-[40%] w-[350px] h-[350px] bg-accent rounded-full z-10 shadow-2xl shadow-accent/20"
+            className="absolute top-[15%] lg:top-[20%] right-[0%] lg:right-[40%] w-[350px] h-[350px] bg-accent rounded-full z-10 shadow-[0_20px_60px_rgba(234,88,12,0.5)]"
             aria-hidden="true"
           />
 
@@ -65,37 +92,37 @@ export function Hero() {
               alt="Schoonmaak specialist Jansma & Dik"
               width={800}
               height={1000}
-              className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_60px_rgba(0,0,0,0.3)] origin-bottom"
+              className="h-full w-auto object-contain object-bottom drop-shadow-[20px_20px_40px_rgba(0,0,0,0.7)] origin-bottom"
               priority
             />
-          </div>
-
-          {/* Floating Trust Badge */}
-          <div className="absolute bottom-20 lg:bottom-28 -left-8 lg:-left-40 z-30 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-            <div className="bg-white shadow-2xl rounded-xl p-4 lg:p-5 flex items-center gap-4 border border-slate-100">
-              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shrink-0">
-                <Check className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold text-slate-800 whitespace-nowrap">Keurmerk Schoon</span>
-                <span className="text-xs text-slate-500 font-medium">& NEN 4400-1</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Social Proof Strip */}
-      <div className="absolute bottom-0 left-0 w-full bg-slate-900 py-6 lg:py-8 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 md:gap-4 opacity-40 grayscale">
-            {["Emergis", "Schipper", "Damen", "Zeeuws Museum", "KOW"].map((logo) => (
-              <span 
-                key={logo} 
-                className="text-white font-bold text-base lg:text-lg uppercase tracking-[0.2em] whitespace-nowrap"
-              >
-                {logo}
-              </span>
+      {/* Social Proof Strip - Infinite Ticker */}
+      <div className="absolute bottom-0 left-0 w-full bg-white border-t border-slate-100 py-6 lg:py-8 z-40 overflow-hidden">
+        <div className="w-full flex">
+          <div className="flex min-w-full shrink-0 animate-ticker items-center gap-12 px-6">
+            {clientLogos.map((logo, index) => (
+              <Image 
+                key={index}
+                src={`/logos/${logo}`} 
+                alt="Client Logo" 
+                width={120} 
+                height={60} 
+                className="h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all"
+              />
+            ))}
+            {/* Duplicate for infinite effect */}
+            {clientLogos.map((logo, index) => (
+              <Image 
+                key={`dup-${index}`}
+                src={`/logos/${logo}`} 
+                alt="Client Logo" 
+                width={120} 
+                height={60} 
+                className="h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all"
+              />
             ))}
           </div>
         </div>

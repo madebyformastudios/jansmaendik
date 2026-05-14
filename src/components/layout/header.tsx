@@ -27,31 +27,31 @@ const services = [
     title: "Kantoor",
     description: "Professionele reiniging van kantoorruimtes en zakelijke omgevingen.",
     href: "/diensten/kantoor",
-    image: "/cleaning-lady-hero.svg",
+    image: "/images/kantoor-schoonmaak.jpeg",
   },
   {
     title: "Industrie & bouw",
     description: "Gespecialiseerde reiniging voor bouwplaatsen en industriële complexen.",
     href: "/diensten/industrie-bouw",
-    image: "/globe.svg",
+    image: "/images/industrie-bouw.jpeg",
   },
   {
     title: "Zorg & scholen",
     description: "Hygiënische schoonmaak voor zorginstellingen en onderwijsgebouwen.",
     href: "/diensten/zorg-scholen",
-    image: "/window.svg",
+    image: "/images/zorg-scholen.jpeg",
   },
   {
     title: "Makelaardij & VVE's",
     description: "Schoonmaakonderhoud voor gedeelde ruimtes en verkoopklaar maken.",
     href: "/diensten/makelaardij",
-    image: "/file.svg",
+    image: "/images/makelaardij-vve.jpeg",
   },
   {
     title: "Maatwerk",
     description: "Specifieke schoonmaakoplossingen afgestemd op uw unieke behoeften.",
     href: "/diensten/maatwerk",
-    image: "/cleaning-lady-hero.svg",
+    image: "/images/maatwerk.jpeg",
   },
 ];
 
@@ -59,13 +59,22 @@ const mainLinks = [
   { name: "Portfolio", href: "/portfolio" },
   { name: "Kwaliteit", href: "/kwaliteit" },
   { name: "Over ons", href: "/over-ons" },
-  { name: "Werken bij", href: "/werken-bij", highlight: true },
+  { name: "Werken bij", href: "/werken-bij" },
   { name: "Contact", href: "/contact" },
 ];
 
 export function Header() {
   const [servicesOpen, setServicesOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleOpen = React.useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -77,7 +86,12 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-slate-100 relative">
+    <header className={cn(
+      "fixed top-0 z-50 w-full transition-all duration-300",
+      isScrolled 
+        ? "bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm" 
+        : "bg-transparent border-transparent"
+    )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
         {/* Left: Logo */}
         <div className="flex shrink-0 items-center">
@@ -140,7 +154,7 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-6">
           <Link
             href="tel:0118461892"
-            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium transition-colors"
+            className="flex items-center gap-2 font-medium transition-colors bg-white hover:bg-slate-50 text-black px-4 py-2 rounded-md shadow-sm border border-slate-100"
           >
             <Phone className="w-4 h-4 text-primary" />
             <span className="text-sm">0118 - 461892</span>
@@ -201,11 +215,6 @@ export function Header() {
                     className="px-6 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 flex items-center justify-between"
                   >
                     {link.name}
-                    {link.highlight && (
-                      <span className="inline-flex items-center rounded-full bg-accent/10 px-2 py-1 text-xs font-medium text-accent">
-                        We zoeken jou!
-                      </span>
-                    )}
                   </Link>
                 ))}
                 <div className="mt-auto px-6 pt-10 pb-6 flex flex-col gap-4">
