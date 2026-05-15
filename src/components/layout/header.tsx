@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, ChevronDown } from "lucide-react";
+import { Phone, ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -14,13 +15,6 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 const services = [
   {
@@ -63,18 +57,29 @@ const mainLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
+// Origin of the circle animation: center of the 44px (w-11) button
+// Button is px-4 (16px) + mr-3 (12px) from the right edge → center at 16+12+22=50px from right
+// Header is h-20 (80px) → button center at 40px from top
+const CIRCLE_ORIGIN = "calc(100% - 50px) 40px";
+
 export function Header() {
   const [servicesOpen, setServicesOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout>>(null);
 
+  // Scroll detection
   React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll while mobile menu is open
+  React.useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   const handleOpen = React.useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -85,33 +90,41 @@ export function Header() {
     closeTimer.current = setTimeout(() => setServicesOpen(false), 150);
   }, []);
 
+  const closeMenu = React.useCallback(() => setMenuOpen(false), []);
+
   return (
     <header className={cn(
       "fixed top-0 z-50 w-full transition-all duration-300",
-      isScrolled 
-        ? "bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm" 
-        : "bg-transparent border-transparent"
+      isScrolled
+        ? "lg:bg-white/95 lg:backdrop-blur-sm lg:border-b lg:border-slate-100 lg:shadow-sm"
+        : "bg-transparent"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
-        {/* Left: Logo */}
-        <div className="flex shrink-0 items-center">
+
+        {/* Logo — sits above the mobile overlay */}
+        <div className={cn(
+          "flex shrink-0 items-center relative z-[70] transition-all duration-300",
+          isScrolled && !menuOpen ? "opacity-0 pointer-events-none lg:opacity-100 lg:pointer-events-auto" : "opacity-100"
+        )}>
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo-no-bg.svg"
               alt="Jansma & Dik Logo"
               width={140}
               height={48}
-              className="h-10 w-auto"
+              className={cn(
+                "h-10 w-auto transition-all duration-300",
+                menuOpen && "brightness-0 invert"
+              )}
               priority
             />
           </Link>
         </div>
 
-        {/* Center: Desktop Navigation */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center">
           <NavigationMenu>
             <NavigationMenuList className="gap-1">
-              {/* Diensten trigger — state managed here, menu rendered outside the popup system */}
               <NavigationMenuItem>
                 <button
                   onMouseEnter={handleOpen}
@@ -139,18 +152,19 @@ export function Header() {
                   <NavigationMenuLink
                     render={<Link href={link.href} />}
                     className={cn(
-                      navigationMenuTriggerStyle(), 
+                      navigationMenuTriggerStyle(),
                       "bg-transparent font-medium text-slate-600 hover:text-slate-900 relative"
                     )}
                   >
                     {link.name}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
-              ))}            </NavigationMenuList>
+              ))}
+            </NavigationMenuList>
           </NavigationMenu>
         </div>
 
-        {/* Right: Actions */}
+        {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-6">
           <Link
             href="tel:0118461892"
@@ -170,76 +184,130 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile: Hamburger Menu */}
-        <div className="lg:hidden flex items-center">
-          <Sheet>
-            <SheetTrigger
-              render={
-                <Button variant="ghost" size="icon" className="text-slate-600">
-                  <Menu className="w-6 h-6" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              }
-            />
-            <SheetContent side="right" className="w-[300px] sm:w-[400px] px-0">
-              <SheetHeader className="px-6 text-left border-b pb-6">
-                <SheetTitle className="font-display text-xl font-semibold">
-                  Jansma <span className="text-accent">&</span> Dik
-                </SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-1 mt-6">
-                <div className="px-6 py-2">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-                    Diensten
-                  </h3>
-                  <div className="flex flex-col gap-3">
-                    <Link href="/diensten" className="text-sm font-semibold text-primary">
-                      Overzicht alle diensten
-                    </Link>
-                    {services.map((service) => (
-                      <Link
-                        key={service.title}
-                        href={service.href}
-                        className="text-sm font-medium text-slate-700 hover:text-primary transition-colors"
-                      >
-                        {service.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <div className="h-px bg-slate-100 my-4 mx-6" />
-                {mainLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="px-6 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 flex items-center justify-between"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <div className="mt-auto px-6 pt-10 pb-6 flex flex-col gap-4">
-                  <Link
-                    href="tel:0118461892"
-                    className={cn(buttonVariants({ variant: "outline" }), "w-full justify-start gap-3")}
-                  >
-                    <Phone className="w-4 h-4" />
-                    0118 - 461892
-                  </Link>
-                  <Link
-                    href="/offerte"
-                    className={cn(buttonVariants({ variant: "accent" }), "w-full")}
-                  >
-                    Offerte Aanvragen
-                  </Link>
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
+        {/* Mobile Hamburger — always above the overlay (z-[70]) */}
+        <div className="lg:hidden relative z-[70] mr-3">
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Sluit menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className="w-11 h-11 rounded-full bg-accent shadow-[0_4px_14px_rgba(234,88,12,0.35)] flex items-center justify-center"
+          >
+            {/* Three bars → X */}
+            <div className="w-5 h-[14px] flex flex-col justify-between">
+              <motion.span
+                animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="block h-[2px] w-full bg-white origin-center rounded-full"
+              />
+              <motion.span
+                animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+                className="block h-[2px] w-full bg-white origin-center rounded-full"
+              />
+              <motion.span
+                animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="block h-[2px] w-full bg-white origin-center rounded-full"
+              />
+            </div>
+          </button>
         </div>
       </div>
 
-      {/* Mega Menu — rendered as absolute child of the sticky header, completely outside
-          Base UI's portal/popup system so no animated ancestor can break its positioning */}
+      {/* ── Mobile Full-Screen Menu Overlay ─────────────────────────────────────
+          Sits at z-[60] (below the z-[70] button and logo).
+          The circle clip-path expands from the centre of the hamburger button. */}
+      <motion.div
+        initial={false}
+        animate={{
+          clipPath: menuOpen
+            ? `circle(200% at ${CIRCLE_ORIGIN})`
+            : `circle(0px at ${CIRCLE_ORIGIN})`,
+        }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className={cn(
+          "lg:hidden fixed inset-0 z-[60] bg-primary overflow-hidden",
+          !menuOpen && "pointer-events-none"
+        )}
+        aria-hidden={!menuOpen}
+      >
+        {/* Content fades in after circle has expanded */}
+        <motion.div
+          animate={{ opacity: menuOpen ? 1 : 0 }}
+          transition={{ duration: 0.25, delay: menuOpen ? 0.3 : 0 }}
+          className="flex flex-col h-full px-6 overflow-y-auto"
+        >
+          {/* Spacer: clears the fixed header area */}
+          <div className="h-24 shrink-0" />
+
+          {/* Diensten sub-section */}
+          <div className="mb-6">
+            <p className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-4">
+              Diensten
+            </p>
+            <div className="flex flex-col">
+              <Link
+                href="/diensten"
+                onClick={closeMenu}
+                className="text-base font-semibold text-white/70 hover:text-white py-2 transition-colors"
+              >
+                Overzicht alle diensten
+              </Link>
+              {services.map((service) => (
+                <Link
+                  key={service.title}
+                  href={service.href}
+                  onClick={closeMenu}
+                  className="text-base font-medium text-white/70 hover:text-white py-2 transition-colors"
+                >
+                  {service.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-white/15 mb-4" />
+
+          {/* Main links */}
+          <nav className="flex flex-col">
+            {mainLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-2xl font-bold text-white hover:text-white/75 py-3 transition-colors flex items-center justify-between group"
+              >
+                {link.name}
+                <span className="text-white/30 group-hover:text-white/50 transition-colors text-xl leading-none">
+                  →
+                </span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTAs */}
+          <div className="mt-auto pt-10 pb-10 flex flex-col gap-3">
+            <Link
+              href="tel:0118461892"
+              onClick={closeMenu}
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-md border border-white/25 text-white font-medium hover:bg-white/10 transition-colors text-sm"
+            >
+              <Phone className="w-4 h-4 shrink-0" />
+              0118 - 461892
+            </Link>
+            <Link
+              href="/offerte"
+              onClick={closeMenu}
+              className={cn(buttonVariants({ variant: "accent" }), "w-full justify-center")}
+            >
+              Offerte Aanvragen
+            </Link>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* ── Desktop Mega Menu ────────────────────────────────────────────────── */}
       <div
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}

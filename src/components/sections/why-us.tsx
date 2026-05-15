@@ -79,11 +79,11 @@ const usps = [
 
 export function WhyUs() {
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 1. Top Header Row */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, x: -32 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -115,7 +115,7 @@ export function WhyUs() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-16"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 text-center mb-12 lg:mb-16"
         >
           {usps.map(({ icon: Icon, title, description }) => (
             <motion.div
@@ -139,7 +139,7 @@ export function WhyUs() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewport}
           transition={{ duration: 0.85, ease }}
-          className="w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden mb-16 relative bg-slate-100"
+          className="w-full aspect-[4/3] sm:aspect-video md:aspect-[21/9] rounded-2xl lg:rounded-[2rem] overflow-hidden mb-12 lg:mb-16 relative bg-slate-100"
         >
           <Image
             src="/images/why-us-banner-image.jpeg"
@@ -155,7 +155,7 @@ export function WhyUs() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:divide-x divide-slate-200 border-t border-slate-200 pt-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 md:divide-x divide-slate-200 border-t border-slate-200 pt-10 lg:pt-12"
         >
           {[
             { end: 1983, start: 1900, label: "Sinds", suffix: "" },
@@ -169,7 +169,7 @@ export function WhyUs() {
               transition={{ duration: 0.65, ease }}
               className="flex flex-col items-center justify-center text-center"
             >
-              <span className="text-4xl md:text-5xl font-light text-slate-900 mb-2 font-display">
+              <span className="text-3xl md:text-5xl font-light text-slate-900 mb-2 font-display">
                 <AnimatedCounter end={end} start={start} duration={2000} suffix={suffix} />
               </span>
               <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">{label}</span>

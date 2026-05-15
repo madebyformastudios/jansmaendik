@@ -93,8 +93,9 @@ export function Services() {
                   y: { duration: 0.65, ease, delay: idx * 0.08 },
                   scale: { duration: 0.3, ease },
                 }}
+                style={{ originX: 0.5, originY: 0.5 }}
                 className={cn(
-                  "relative rounded-2xl p-6 lg:p-8 flex flex-col justify-between group",
+                  "relative rounded-2xl p-5 lg:p-8 flex flex-col justify-between group",
                   "transition-[background-color,box-shadow] duration-300",
                   isActive
                     ? "bg-white text-slate-900 shadow-2xl z-10"
@@ -120,18 +121,18 @@ export function Services() {
                         !isActive && "opacity-90 saturate-50 group-hover:saturate-100"
                       )}
                     />
-                  </div>
 
-                  {/* Floating Action Button */}
-                  <Link
-                    href="/diensten"
-                    className={cn(
-                      "absolute -bottom-4 -right-4 w-14 h-14 bg-accent rounded-full flex items-center justify-center text-white shadow-xl transition-all duration-200 hover:scale-110 hover:shadow-accent/40",
-                      !isActive && "opacity-90 group-hover:opacity-100"
-                    )}
-                  >
-                    <ArrowUpRight className="w-6 h-6" />
-                  </Link>
+                    {/* Floating Action Button — inside image to avoid overflow */}
+                    <Link
+                      href="/diensten"
+                      className={cn(
+                        "absolute bottom-3 right-3 w-11 h-11 lg:w-14 lg:h-14 bg-accent rounded-full flex items-center justify-center text-white shadow-xl transition-all duration-200 hover:scale-110 hover:shadow-accent/40",
+                        !isActive && "opacity-90 group-hover:opacity-100"
+                      )}
+                    >
+                      <ArrowUpRight className="w-5 h-5 lg:w-6 lg:h-6" />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             );

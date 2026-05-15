@@ -19,7 +19,7 @@ import { ease, viewport } from "@/lib/motion";
 export function ContactForm() {
   return (
     <section className="w-full bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 py-24 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 py-16 lg:py-24 items-center">
 
         {/* Column 1: Content & Form */}
         <motion.div
@@ -107,7 +107,7 @@ export function ContactForm() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={viewport}
           transition={{ duration: 0.65, ease, delay: 0.15 }}
-          className="relative w-full max-w-2xl mx-auto aspect-square lg:aspect-auto lg:h-[600px] bg-slate-200 rounded-[2rem] overflow-hidden shadow-lg border border-slate-200/60"
+          className="relative w-full max-w-2xl mx-auto aspect-[4/3] sm:aspect-square lg:aspect-auto lg:h-[600px] bg-slate-200 rounded-2xl lg:rounded-[2rem] overflow-hidden shadow-lg border border-slate-200/60"
         >
           <iframe
             src="https://maps.google.com/maps?q=Jansma%20%26%20Dik%20Schoonmaakbedrijf%2C%20Vlissingen&t=&z=14&ie=UTF8&iwloc=&output=embed"
