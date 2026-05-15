@@ -35,7 +35,7 @@ const clientLogos = [
 
 export function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden min-h-[640px] lg:min-h-[850px] flex items-center">
+    <section className="relative bg-white overflow-hidden min-h-[640px] lg:min-h-[850px] flex items-center pt-20 lg:pt-0">
 
       {/* Background diagonal — narrow accent strip on mobile, full diagonal on desktop */}
       <motion.div

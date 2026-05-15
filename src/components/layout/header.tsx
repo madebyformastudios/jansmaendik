@@ -237,8 +237,8 @@ export function Header() {
           transition={{ duration: 0.25, delay: menuOpen ? 0.3 : 0 }}
           className="flex flex-col h-full px-6 overflow-y-auto"
         >
-          {/* Spacer: clears the fixed header area */}
-          <div className="h-24 shrink-0" />
+          {/* Sticky shield: keeps header area covered as content scrolls up */}
+          <div className="sticky top-0 h-20 -mx-6 bg-primary shrink-0 z-10" />
 
           {/* Diensten sub-section */}
           <div className="mb-6">
