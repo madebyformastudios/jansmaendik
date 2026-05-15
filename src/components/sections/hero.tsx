@@ -35,7 +35,7 @@ const clientLogos = [
 
 export function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden min-h-[640px] lg:min-h-[850px] xl:min-h-[920px] flex items-center pt-20 lg:pt-28 xl:pt-36">
+    <section className="relative bg-white overflow-hidden min-h-[640px] h-dvh flex items-center pt-20 lg:pt-28 xl:pt-36">
 
       {/* Background diagonal — narrow accent strip on mobile, full diagonal on desktop */}
       <motion.div
@@ -49,12 +49,12 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 grid lg:grid-cols-12 items-center">
 
         {/* Left Column: Text & CTAs — full width on mobile */}
-        <div className="lg:col-span-7 pt-14 pb-32 lg:pt-10 lg:pb-32 xl:pb-40 lg:pr-20 xl:pr-28">
+        <div className="lg:col-span-7 pt-14 pb-32 lg:pt-[clamp(1rem,3dvh,2.5rem)] lg:pb-[clamp(6rem,13dvh,8rem)] xl:pb-[clamp(7rem,14dvh,10rem)] lg:pr-20 xl:pr-28">
           <motion.h1
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
-            className="text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display"
+            className="text-3xl sm:text-5xl lg:text-[clamp(3rem,7dvh,4.5rem)] xl:text-[clamp(3.5rem,8dvh,6rem)] font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display"
           >
             De schoonmaakpartner van{" "}
             <span className="relative inline-block z-10">
@@ -80,7 +80,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
-            className="text-base lg:text-xl text-slate-600 mt-6 lg:mt-8 leading-relaxed font-sans max-w-lg"
+            className="text-base lg:text-[clamp(1rem,2dvh,1.25rem)] text-slate-600 mt-6 lg:mt-[clamp(1rem,2.5dvh,2rem)] leading-relaxed font-sans max-w-lg"
           >
             Betrouwbaar, gecertificeerd en altijd flexibel. Voor kantoren, scholen, zorg en industrie. 80 vaste medewerkers, 300+ locaties.
           </motion.p>
@@ -137,13 +137,13 @@ export function Hero() {
         </div>
 
         {/* Right Column: Visuals — hidden on mobile */}
-        <div className="hidden lg:flex lg:col-span-5 relative h-[700px] xl:h-[820px] items-end justify-end">
+        <div className="hidden lg:flex lg:col-span-5 relative h-[min(700px,73dvh)] xl:h-[min(820px,77dvh)] items-end justify-end">
           {/* Orange Circle */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease, delay: 0.1 }}
-            className="absolute top-[20%] right-[40%] w-[350px] h-[350px] bg-accent rounded-full z-10 shadow-[0_20px_60px_rgba(234,88,12,0.5)]"
+            className="absolute top-[20%] right-[40%] w-[min(350px,38dvh)] h-[min(350px,38dvh)] bg-accent rounded-full z-10 shadow-[0_20px_60px_rgba(234,88,12,0.5)]"
             aria-hidden="true"
           />
 

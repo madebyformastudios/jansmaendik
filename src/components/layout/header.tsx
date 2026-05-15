@@ -181,7 +181,7 @@ export function Header() {
             href="/offerte"
             className={cn(
               buttonVariants({ variant: "accent" }),
-              "shadow-sm hover:translate-y-[-1px] transition-all"
+              "h-auto px-4 py-2 xl:px-5 text-sm xl:text-base shadow-sm hover:translate-y-[-1px] transition-all"
             )}
           >
             Offerte Aanvragen
