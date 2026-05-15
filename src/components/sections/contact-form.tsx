@@ -32,7 +32,7 @@ export function ContactForm() {
             <span className="text-accent font-bold text-sm tracking-widest uppercase mb-2 block">
               Contact
             </span>
-            <h2 className="text-4xl font-extrabold text-slate-900 mb-4 font-display leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 font-display leading-tight">
               Klaar voor een schone werkomgeving?
             </h2>
             <p className="text-lg text-slate-600">

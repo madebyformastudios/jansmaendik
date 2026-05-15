@@ -60,7 +60,7 @@ export function Services() {
             <span className="text-white/60 font-semibold tracking-wider uppercase text-sm mb-4 block">
               — Onze Diensten
             </span>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-tight font-display tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white leading-tight font-display tracking-tight">
               Voor elk bedrijf de juiste{" "}
               <span className="text-accent">schoonmaakoplossing.</span>
             </h2>

@@ -91,9 +91,9 @@ export function WhyUs() {
             transition={{ duration: 0.65, ease }}
           >
             <span className="text-accent font-bold tracking-widest text-sm mb-3 uppercase block">
-              WAAROM JANSMA &amp; DIK
+              WAAROM JANSMA & DIK
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight font-display">
               Betrokken, betrouwbaar en flexibel.
             </h2>
           </motion.div>
