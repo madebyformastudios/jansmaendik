@@ -469,7 +469,7 @@ export default function WerkenBijPage() {
       <Dialog open={sheetOpen} onOpenChange={setSheetOpen}>
         <DialogContent
           showCloseButton={false}
-          className="top-3 left-3 right-3 bottom-3 sm:top-4 sm:left-4 sm:right-4 sm:bottom-4 translate-x-0 translate-y-0 w-auto max-w-none sm:max-w-none flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden p-0 gap-0 bg-white ring-0 border border-slate-200 shadow-2xl"
+          className="top-3 left-3 right-3 bottom-3 sm:top-4 sm:left-4 sm:right-4 sm:bottom-4 translate-x-0 translate-y-0 w-auto max-w-none sm:max-w-none flex flex-col rounded-2xl sm:rounded-3xl overflow-hidden overflow-x-hidden p-0 gap-0 bg-white ring-0 border border-slate-200 shadow-2xl"
         >
           {selectedJob && (
             <>
@@ -517,7 +517,7 @@ export default function WerkenBijPage() {
                     {selectedJob.badge}
                   </span>
 
-                  <h2 className="text-3xl font-extrabold text-slate-900 font-display leading-tight mb-2">
+                  <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 font-display leading-tight mb-2">
                     {selectedJob.title}
                   </h2>
                   <div className="flex flex-wrap gap-4 mb-8 text-sm text-slate-500">
