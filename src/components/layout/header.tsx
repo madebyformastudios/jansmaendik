@@ -103,7 +103,7 @@ export function Header() {
         ? "lg:bg-white/95 lg:backdrop-blur-sm lg:border-b lg:border-slate-100 lg:shadow-sm"
         : "bg-transparent"
     )}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex h-20 xl:h-24 items-center justify-between">
 
         {/* Logo — sits above the mobile overlay */}
         <div className={cn(
@@ -117,7 +117,7 @@ export function Header() {
               width={140}
               height={48}
               className={cn(
-                "h-10 w-auto transition-all duration-300",
+                "h-10 xl:h-12 w-auto transition-all duration-300",
                 menuOpen && "brightness-0 invert"
               )}
               priority
@@ -137,7 +137,7 @@ export function Header() {
                   aria-haspopup="true"
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "bg-transparent font-medium text-slate-600 hover:text-slate-900 group/diensten-trigger"
+                    "bg-transparent font-medium text-slate-600 hover:text-slate-900 xl:text-base xl:px-5 group/diensten-trigger"
                   )}
                 >
                   Diensten
@@ -157,7 +157,7 @@ export function Header() {
                     render={<Link href={link.href} />}
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent font-medium text-slate-600 hover:text-slate-900 relative"
+                      "bg-transparent font-medium text-slate-600 hover:text-slate-900 xl:text-base xl:px-5 relative"
                     )}
                   >
                     {link.name}
@@ -172,10 +172,10 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-6">
           <Link
             href="tel:0118461892"
-            className="flex items-center gap-2 font-medium transition-colors bg-white hover:bg-slate-50 text-black px-4 py-2 rounded-md shadow-sm border border-slate-100"
+            className="flex items-center gap-2 font-medium transition-colors bg-white hover:bg-slate-50 text-black px-4 xl:px-5 py-2 rounded-md shadow-sm border border-slate-100"
           >
             <Phone className="w-4 h-4 text-primary" />
-            <span className="text-sm">0118 - 461892</span>
+            <span className="text-sm xl:text-base">0118 - 461892</span>
           </Link>
           <Link
             href="/offerte"
@@ -342,7 +342,7 @@ export function Header() {
         )}
         aria-hidden={!servicesOpen}
       >
-        <div className="max-w-7xl mx-auto px-8 py-12">
+        <div className="max-w-screen-2xl mx-auto px-8 xl:px-12 py-12">
           <div className="flex items-center justify-between mb-10 pb-6 border-b border-slate-50">
             <div>
               <h2 className="text-2xl font-display font-semibold text-slate-900">Onze Diensten</h2>

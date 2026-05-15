@@ -35,7 +35,7 @@ const clientLogos = [
 
 export function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden min-h-[640px] lg:min-h-[850px] flex items-center pt-20 lg:pt-0">
+    <section className="relative bg-white overflow-hidden min-h-[640px] lg:min-h-[850px] xl:min-h-[920px] flex items-center pt-20 lg:pt-28 xl:pt-36">
 
       {/* Background diagonal — narrow accent strip on mobile, full diagonal on desktop */}
       <motion.div
@@ -46,15 +46,15 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 items-center">
+      <div className="relative z-10 w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 grid lg:grid-cols-12 items-center">
 
         {/* Left Column: Text & CTAs — full width on mobile */}
-        <div className="lg:col-span-7 pt-14 pb-32 lg:pt-10 lg:pb-20 lg:pr-12">
+        <div className="lg:col-span-7 pt-14 pb-32 lg:pt-10 lg:pb-32 xl:pb-40 lg:pr-20 xl:pr-28">
           <motion.h1
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
-            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display"
+            className="text-3xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display"
           >
             De schoonmaakpartner van{" "}
             <span className="relative inline-block z-10">
@@ -137,7 +137,7 @@ export function Hero() {
         </div>
 
         {/* Right Column: Visuals — hidden on mobile */}
-        <div className="hidden lg:flex lg:col-span-5 relative h-[700px] items-end justify-end">
+        <div className="hidden lg:flex lg:col-span-5 relative h-[700px] xl:h-[820px] items-end justify-end">
           {/* Orange Circle */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
