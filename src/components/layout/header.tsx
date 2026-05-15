@@ -66,6 +66,7 @@ export function Header() {
   const [servicesOpen, setServicesOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [dienstenOpen, setDienstenOpen] = React.useState(false);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   // Scroll detection
@@ -90,7 +91,10 @@ export function Header() {
     closeTimer.current = setTimeout(() => setServicesOpen(false), 150);
   }, []);
 
-  const closeMenu = React.useCallback(() => setMenuOpen(false), []);
+  const closeMenu = React.useCallback(() => {
+    setMenuOpen(false);
+    setDienstenOpen(false);
+  }, []);
 
   return (
     <header className={cn(
@@ -240,37 +244,54 @@ export function Header() {
           {/* Sticky shield: keeps header area covered as content scrolls up */}
           <div className="sticky top-0 h-20 -mx-6 bg-primary shrink-0 z-10" />
 
-          {/* Diensten sub-section */}
-          <div className="mb-6">
-            <p className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-4">
-              Diensten
-            </p>
-            <div className="flex flex-col">
-              <Link
-                href="/diensten"
-                onClick={closeMenu}
-                className="text-base font-semibold text-white/70 hover:text-white py-2 transition-colors"
-              >
-                Overzicht alle diensten
-              </Link>
-              {services.map((service) => (
-                <Link
-                  key={service.title}
-                  href={service.href}
-                  onClick={closeMenu}
-                  className="text-base font-medium text-white/70 hover:text-white py-2 transition-colors"
-                >
-                  {service.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px bg-white/15 mb-4" />
-
-          {/* Main links */}
+          {/* Main links + Diensten accordion */}
           <nav className="flex flex-col">
+            {/* Diensten — collapsible */}
+            <div>
+              <button
+                onClick={() => setDienstenOpen((v) => !v)}
+                className="w-full text-2xl font-bold text-white hover:text-white/75 py-3 transition-colors flex items-center justify-between group"
+              >
+                Diensten
+                <ChevronDown
+                  className={cn(
+                    "w-6 h-6 text-white/50 transition-transform duration-300",
+                    dienstenOpen && "rotate-180"
+                  )}
+                />
+              </button>
+
+              <motion.div
+                initial={false}
+                animate={{ height: dienstenOpen ? "auto" : 0, opacity: dienstenOpen ? 1 : 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <div className="flex flex-col pb-2 pl-2">
+                  <Link
+                    href="/diensten"
+                    onClick={closeMenu}
+                    className="text-base font-semibold text-white/70 hover:text-white py-2 transition-colors"
+                  >
+                    Overzicht alle diensten
+                  </Link>
+                  {services.map((service) => (
+                    <Link
+                      key={service.title}
+                      href={service.href}
+                      onClick={closeMenu}
+                      className="text-base font-medium text-white/60 hover:text-white py-2 transition-colors"
+                    >
+                      {service.title}
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-white/15 my-1" />
+
             {mainLinks.map((link) => (
               <Link
                 key={link.name}
