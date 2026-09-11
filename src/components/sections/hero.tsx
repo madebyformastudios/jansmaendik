@@ -1,11 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ease } from "@/lib/motion";
 
 const clientLogos = [
   "portfolio_logos_13_0a_Laspartners.jpg",
@@ -38,10 +34,7 @@ export function Hero() {
     <section className="relative bg-white overflow-hidden min-h-[640px] h-dvh flex items-center pt-20 lg:pt-28 xl:pt-36">
 
       {/* Background diagonal — narrow accent strip on mobile, full diagonal on desktop */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease }}
+      <div
         className="absolute inset-0 bg-primary [clip-path:polygon(0%_68%,100%_52%,100%_100%,0%_100%)] lg:[clip-path:polygon(76%_0,100%_0,100%_100%,54%_100%)] z-0"
         aria-hidden="true"
       />
@@ -50,12 +43,7 @@ export function Hero() {
 
         {/* Left Column: Text & CTAs — full width on mobile */}
         <div className="lg:col-span-7 pt-14 pb-32 lg:pt-[clamp(1rem,3dvh,2.5rem)] lg:pb-[clamp(6rem,13dvh,8rem)] xl:pb-[clamp(7rem,14dvh,10rem)] lg:pr-20 xl:pr-28">
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease }}
-            className="text-3xl sm:text-5xl lg:text-[clamp(3rem,7dvh,4.5rem)] xl:text-[clamp(3.5rem,8dvh,6rem)] font-extrabold text-slate-900 tracking-tight leading-[1.1] font-display"
-          >
+          <h1 className="text-[2rem] sm:text-4xl lg:text-5xl xl:text-[3.5rem] font-semibold text-slate-900 tracking-tight leading-[1.15] font-display">
             De schoonmaakpartner van{" "}
             <span className="relative inline-block z-10">
               Zeeland
@@ -68,40 +56,31 @@ export function Hero() {
               >
                 <path
                   d="M0,8 C28,2 72,13 112,7 C150,2 176,10 200,7 L200,18 C176,22 150,15 112,20 C72,25 28,18 0,19 Z"
-                  fill="#ea580c"
+                  fill="#EA5E1D"
                   opacity="0.72"
                 />
               </svg>
             </span>
             {" "}sinds 1983.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.2 }}
-            className="text-base lg:text-[clamp(1rem,2dvh,1.25rem)] text-slate-600 mt-6 lg:mt-[clamp(1rem,2.5dvh,2rem)] leading-relaxed font-sans max-w-lg"
-          >
+          <p className="text-base lg:text-lg text-slate-600 mt-6 lg:mt-8 leading-relaxed font-sans max-w-lg">
             Betrouwbaar, gecertificeerd en altijd flexibel. Voor kantoren, scholen, zorg en industrie. 80 vaste medewerkers, 300+ locaties.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.4 }}
-            className="mt-8 lg:mt-10 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center"
-          >
+          <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
             <Button
               render={<Link href="/offerte" />}
               nativeButton={false}
-              className="bg-accent hover:bg-accent/90 text-white px-8 py-6 lg:py-7 text-base lg:text-lg rounded-md shadow-lg shadow-accent/20 transition-all hover:translate-y-[-2px] justify-center"
+              variant="accent"
+              className="h-auto px-8 py-4 text-base lg:text-lg rounded-md transition-colors duration-150 justify-center"
             >
               Vrijblijvende offerte aanvragen
             </Button>
             {/* Mobile: button style matching the nav */}
             <Link
               href="tel:0118461892"
-              className="lg:hidden flex items-center justify-center gap-2 font-medium bg-white hover:bg-slate-50 text-slate-900 px-5 py-3 rounded-md shadow-sm border border-slate-200 transition-colors text-sm"
+              className="lg:hidden flex items-center justify-center gap-2 font-medium bg-white hover:bg-slate-50 text-slate-900 px-5 py-3 rounded-md border border-slate-200 transition-colors duration-150 text-sm"
             >
               <Phone className="w-4 h-4 text-primary shrink-0" />
               0118 - 461892
@@ -110,69 +89,51 @@ export function Hero() {
             {/* Desktop: icon-circle style */}
             <Link
               href="tel:0118461892"
-              className="hidden lg:flex items-center gap-3 text-slate-800 font-semibold text-lg hover:text-primary transition-colors group px-4 py-2"
+              className="hidden lg:flex items-center gap-3 text-slate-800 font-semibold text-lg hover:text-primary transition-colors duration-150 group px-4 py-2"
             >
-              <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors duration-150">
                 <Phone className="w-5 h-5 text-primary" />
               </div>
               0118 - 461892
             </Link>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.55 }}
-            className="mt-8 lg:mt-10 flex justify-center lg:justify-start"
-          >
-            <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full px-4 py-2 shadow-sm">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shrink-0">
+          <div className="mt-8 lg:mt-10 flex justify-center lg:justify-start">
+            <div className="inline-flex items-center gap-3 bg-white border border-primary/30 rounded-full px-4 py-2">
+              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-700">Keurmerk Schoon</span>
+              <span className="text-sm font-semibold text-primary">Keurmerk Schoon</span>
               <span className="text-slate-300">·</span>
               <span className="text-sm text-slate-500">NEN 4400-1</span>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right Column: Visuals — hidden on mobile */}
         <div className="hidden lg:flex lg:col-span-5 relative h-[min(700px,73dvh)] xl:h-[min(820px,77dvh)] items-end justify-end">
           {/* Orange Circle */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease, delay: 0.1 }}
-            className="absolute top-[20%] right-[40%] w-[min(350px,38dvh)] h-[min(350px,38dvh)] bg-accent rounded-full z-10 shadow-[0_20px_60px_rgba(234,88,12,0.5)]"
+          <div
+            className="absolute top-[20%] right-[40%] w-[min(350px,38dvh)] h-[min(350px,38dvh)] bg-accent rounded-full z-10"
             aria-hidden="true"
           />
 
           {/* Cutout Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 0.2 }}
-            className="relative z-20 h-[115%] w-auto flex items-end overflow-visible -translate-x-12"
-          >
+          <div className="relative z-20 h-[115%] w-auto flex items-end overflow-visible -translate-x-12">
             <Image
               src="/cleaning-lady-hero.svg"
               alt="Schoonmaak specialist Jansma & Dik"
               width={800}
               height={1000}
-              className="h-full w-auto object-contain object-bottom drop-shadow-[20px_20px_40px_rgba(0,0,0,0.7)] origin-bottom"
+              className="h-full w-auto object-contain object-bottom origin-bottom"
               priority
             />
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Social Proof Strip - Infinite Ticker */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, ease, delay: 0.7 }}
-        className="absolute bottom-0 left-0 w-full bg-white border-t border-slate-100 py-5 lg:py-8 z-40 overflow-hidden"
-      >
+      <div className="absolute bottom-0 left-0 w-full bg-white border-t border-slate-100 py-5 lg:py-8 z-40 overflow-hidden">
         <div className="w-full flex">
           <div className="flex min-w-full shrink-0 animate-ticker items-center gap-8 lg:gap-12 px-6">
             {clientLogos.map((logo, index) => (
@@ -182,7 +143,7 @@ export function Hero() {
                 alt="Client Logo"
                 width={120}
                 height={60}
-                className="h-8 lg:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="h-8 lg:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-150"
               />
             ))}
             {clientLogos.map((logo, index) => (
@@ -192,12 +153,12 @@ export function Hero() {
                 alt="Client Logo"
                 width={120}
                 height={60}
-                className="h-8 lg:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="h-8 lg:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-150"
               />
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
